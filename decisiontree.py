@@ -27,6 +27,12 @@ if __name__ == '__main__':
 
     model.fit(X_train,y_train)
 
-    plt.figure(figsize=(16,10), dpi=100)
-    plot_tree(model, feature_names=iris['feature_names'], class_names=iris['target_names'], filled=True)
-    plt.show()
+    # Visualization of the decision tree
+    #plt.figure(figsize=(16,10), dpi=100)
+    #plot_tree(model, feature_names=iris['feature_names'], class_names=iris['target_names'], filled=True)
+    #plt.show()
+
+    # ----------- EVAULUATING THE MODEL ----------- #
+    predictions = model.predict(X_test)
+    print(predictions)
+    print(y_test)
