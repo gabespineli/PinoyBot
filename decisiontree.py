@@ -4,6 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 import numpy as np
+import featurematrix as fm
 
 if __name__ == '__main__':
     # ----------- PREPARE THE DATA ----------- #
@@ -11,8 +12,7 @@ if __name__ == '__main__':
     df = pd.read_csv('csintsy_annotations.csv')
 
     # Encode words to numbers
-    le_word = LabelEncoder()
-    X = le_word.fit_transform(df['word']).reshape(-1, 1)
+    X = np.array(fm.getMatrix(df['word']))
     
     # Extract labels as target
     y = df['label'].values
