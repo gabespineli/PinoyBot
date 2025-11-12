@@ -32,7 +32,19 @@ def getMatrix(words):
     
     def hasFilipinoPrefix(word):
         """Checks common Filipino prefixes."""
-        prefixes = ['mag', 'ma', 'ka', 'pag']
+        prefixes = ['mag', 'ma', 'ka', 'pag', 'nag', 'um', 'ipa']
+        lw = word.lower()
+        return any(lw.startswith(p) for p in prefixes)
+    
+    def hasFilipinoSuffix(word):
+        """Checks common Filipino suffixes."""
+        suffixes = ['in', 'an', 'han', 'hin', 'um', 'ng']
+        lw = word.lower()
+        return any(lw.endswith(s) for s in suffixes)
+    
+    def hasEnglishPrefix(word):
+        """Checks common English prefixes."""
+        prefixes = ['un', 'dis', 're', 'pre']
         lw = word.lower()
         return any(lw.startswith(p) for p in prefixes)
 
@@ -41,10 +53,23 @@ def getMatrix(words):
         suffixes = ['ing', 'ed', 'tion', 'ness', 'ly']
         lw = word.lower()
         return any(lw.endswith(s) for s in suffixes)
+    
 
     def isCapitalized(word):
         """Checks if first letter is capitalized (names or OTH)."""
         return len(word) > 0 and word[0].isupper()
+    
+    def hasEnglishLetterCombination(word):
+        """Checks for common English letter combinations."""
+        combinations = ['th', 'sh', 'ch', 'ph', 'qu']
+        lw = word.lower()
+        return any(comb in lw for comb in combinations)
+    
+    def hasEnglishLetter(word):
+        """Checks for letters commonly found in English words."""
+        letters = ['c', 'x', 'z', 'q', 'v', 'j']
+        lw = word.lower()
+        return any(letter in lw for letter in letters)
 
     for word in words:
         feats = []
@@ -53,11 +78,16 @@ def getMatrix(words):
         feats.append(countLetter(word))
         feats.append(vowelRatio(word))
         feats.append(int(hasFilipinoPrefix(word)))
+        feats.append(int(hasFilipinoSuffix(word)))
+        feats.append(int(hasEnglishPrefix(word)))
         feats.append(int(hasEnglishSuffix(word)))
         feats.append(int(isCapitalized(word)))
         feats.append(countDigits(word))
         feats.append(countUppercase(word))
         feats.append(countSymbols(word))
+        feats.append(int(hasEnglishLetter(word)))
+        feats.append(int(hasEnglishLetterCombination(word)))
+        
 
         matrix.append(feats)
 
