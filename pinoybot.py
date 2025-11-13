@@ -24,25 +24,19 @@ def tag_language(tokens: List[str]) -> List[str]:
         tags: List of predicted tags ("ENG", "FIL", or "OTH"), one per token.
     """
     # 1. Load your trained model from disk (e.g., using pickle or joblib)
-    #    Example: with open('trained_model.pkl', 'rb') as f: model = pickle.load(f)
-    #    (Replace with your actual model loading code)
     with open('decision_tree_model.pkl', 'rb') as file:
         model = pickle.load(file)
 
     # 2. Extract features from the input tokens to create the feature matrix
-    #    Example: features = ... (your feature extraction logic here)
     features = np.array(fm.getMatrix(tokens))
 
     # 3. Use the model to predict the tags for each token
-    #    Example: predicted = model.predict(features)
     predicted = model.predict(features)
 
     # 4. Convert the predictions to a list of strings ("ENG", "FIL", or "OTH")
-    #    Example: tags = [str(tag) for tag in predicted]
     tags = [str(tag) for tag in predicted]
 
     # 5. Return the list of tags
-    #    return tags
     return tags
 
     # You can define other functions, import new libraries, or add other Python files as needed, as long as
@@ -50,7 +44,15 @@ def tag_language(tokens: List[str]) -> List[str]:
 
 if __name__ == "__main__":
     # Example usage
-    example_tokens = ["Love", "kita", "."]
-    print("Tokens:", example_tokens)
+    example_tokens = [
+    "Malaking", "epekto", "sa", "Boston", "Celtics", "ang", "pagkawala", "ni", "Jason", 
+    "titum", "sa", "kanilang", "line", "up", "nila", "sa", "game", "6", "dahil", 
+    "natalo", "Sila", "Ng", "new", "York", "Knicks", "kung", "kamakailan", "SI", 
+    "Jason", "titum", "nagkaroon", "Ng", "injury", "dahilan", "Hindi", "sya", 
+    "nakalaro", "sa", "game", "6", "at", "nyari", "na", "Sila", "sa", "kamay", 
+    "Ng", "new", "York", "knicks"
+    ]
+
     tags = tag_language(example_tokens)
-    print(tags)
+    for token, tag in zip(example_tokens, tags):
+        print(token, tag)
