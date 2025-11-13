@@ -109,6 +109,27 @@ def getMatrix(words):
                 return True         
         return False
 
+    def endsWithEng(word):
+        letters = ['t', 's', 'd', 'e', 'n']
+        lw = word.lower()
+        last = lw[-1]
+        return any(lw.endswith(l) for l in letters)
+
+    def endsWithFil(word):
+        letters = ['n', 'g', 'a', 'e', 'o', 'u']
+        lw = word.lower()
+        last = lw[-1]
+        return any(lw.endswith(l) for l in letters)
+
+    def startsWithEng(word):
+        letters = ['t', 'p', 'r', 's', 'a', 'w', 'j', 'q', 'z']
+        lw = word.lower()
+        return any(lw.startswith(l) for l in letters)
+
+    def startsWithFil(word):
+        letters = ['m', 'k', 'b', 'i', 'a', 's']
+        lw = word.lower()
+        return any(lw.startswith(l) for l in letters)
 
     for word in words:
         feats = []
@@ -129,6 +150,12 @@ def getMatrix(words):
         feats.append(int(hasEnglishLetterCombination(word)))
         feats.append(count_max_consecutive_consonants(word))
         feats.append(int(contains_double_letter(word)))
+        feats.append(int(endsWithEng(word)))
+        feats.append(int(endsWithFil(word)))
+        feats.append(int(startsWithEng(word)))
+        feats.append(int(startsWithFil(word)))
+
+
 
         matrix.append(feats)
 
