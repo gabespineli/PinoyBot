@@ -129,10 +129,8 @@ def getMatrix(words):
         feats.append(int(hasEnglishLetterCombination(word)))
         feats.append(count_max_consecutive_consonants(word))
         feats.append(int(contains_double_letter(word)))
-        feats.append(int(isEnglish(word)))
-        
 
         matrix.append(feats)
-
+        
     return matrix
 
