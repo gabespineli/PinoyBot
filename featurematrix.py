@@ -131,6 +131,6 @@ def getMatrix(words):
         feats.append(int(contains_double_letter(word)))
 
         matrix.append(feats)
-        
+
     return matrix
 

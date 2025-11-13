@@ -13,7 +13,6 @@ if __name__ == '__main__':
 
     # Encode words to numbers
     X = np.array(fm.getMatrix(df['word']))
-    df = df.dropna(subset=['word'])
 
     
     # Extract labels as target
