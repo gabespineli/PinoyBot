@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 import numpy as np
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
     
     # ----------- TRAIN THE MODEL ----------- #
-    model = DecisionTreeClassifier()
+    model = RandomForestClassifier(n_estimators=100,random_state=42)
 
     model.fit(X_train,y_train)
 
