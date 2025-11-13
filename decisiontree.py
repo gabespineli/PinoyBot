@@ -6,6 +6,9 @@ import numpy as np
 import featurematrix as fm
 import pickle
 
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
 if __name__ == '__main__':
     # ----------- PREPARE THE DATA ----------- #
     
@@ -62,3 +65,15 @@ if __name__ == '__main__':
     print(f"Accuracy: {accuracy_score(y_test, test_predictions) * 100:.2f}%")
     print(f"Macro F1-Score: {f1_score(y_test, test_predictions, average='macro') * 100:.2f}%")
     print("\n" + classification_report(y_test, test_predictions))
+
+    # ----------- CONFUSION MATRIX ----------- #
+    labels = sorted(np.unique(y))
+
+    cm = confusion_matrix(y_test, test_predictions, labels=labels)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+
+    disp.plot(cmap=plt.cm.Blues, values_format='d')
+    plt.title("Confusion Matrix - Test Set")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
