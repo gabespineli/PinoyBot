@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 import numpy as np
 import featurematrix as fm
+import pickle
 
 if __name__ == '__main__':
     # ----------- PREPARE THE DATA ----------- #
@@ -32,6 +33,15 @@ if __name__ == '__main__':
     model = DecisionTreeClassifier()
 
     model.fit(X_train,y_train)
+
+    # ----------- SAVE THE MODEL TO A .PKL FILE ----------- #
+    model_filename = 'decision_tree_model.pkl'
+    try:
+        with open(model_filename, 'wb') as file:
+            pickle.dump(model, file)
+        print(f"\nSuccessfully saved the trained model to {model_filename}")
+    except Exception as e:
+        print(f"\nAn error occurred while saving the model: {e}")
 
     # ----------- VALIDATION PERFORMANCE ----------- #
     val_predictions = model.predict(X_val)

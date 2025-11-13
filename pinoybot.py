@@ -11,6 +11,8 @@ Model training and feature extraction should be implemented in a separate script
 import os
 import pickle
 from typing import List
+import numpy as np
+import featurematrix as fm
 
 # Main tagging function
 def tag_language(tokens: List[str]) -> List[str]:
@@ -24,24 +26,27 @@ def tag_language(tokens: List[str]) -> List[str]:
     # 1. Load your trained model from disk (e.g., using pickle or joblib)
     #    Example: with open('trained_model.pkl', 'rb') as f: model = pickle.load(f)
     #    (Replace with your actual model loading code)
+    with open('decision_tree_model.pkl', 'rb') as file:
+        model = pickle.load(file)
 
     # 2. Extract features from the input tokens to create the feature matrix
     #    Example: features = ... (your feature extraction logic here)
+    features = np.array(fm.getMatrix(tokens))
 
     # 3. Use the model to predict the tags for each token
     #    Example: predicted = model.predict(features)
+    predicted = model.predict(features)
 
     # 4. Convert the predictions to a list of strings ("ENG", "FIL", or "OTH")
     #    Example: tags = [str(tag) for tag in predicted]
+    tags = [str(tag) for tag in predicted]
 
     # 5. Return the list of tags
     #    return tags
+    return tags
 
     # You can define other functions, import new libraries, or add other Python files as needed, as long as
     # the tag_language function is retained and correctly accomplishes the expected task.
-
-    # Currently, the bot just tags every token as FIL. Replace this with your more intelligent predictions.
-    return ['FIL' for i in tokens]
 
 if __name__ == "__main__":
     # Example usage
