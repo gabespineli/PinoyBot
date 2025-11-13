@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, classification_report
@@ -14,6 +13,8 @@ if __name__ == '__main__':
 
     # Encode words to numbers
     X = np.array(fm.getMatrix(df['word']))
+    df = df.dropna(subset=['word'])
+
     
     # Extract labels as target
     y = df['label'].values
