@@ -24,7 +24,7 @@ def tag_language(tokens: List[str]) -> List[str]:
         tags: List of predicted tags ("ENG", "FIL", or "OTH"), one per token.
     """
     # 1. Load your trained model from disk (e.g., using pickle or joblib)
-    with open('decision_tree_model.pkl', 'rb') as file:
+    with open('model.pkl', 'rb') as file:
         model = pickle.load(file)
 
     # 2. Extract features from the input tokens to create the feature matrix
