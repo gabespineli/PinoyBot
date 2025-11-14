@@ -67,7 +67,7 @@ def getMatrix(words):
     
     def hasEnglishLetterCombination(word):
         """Checks for common English letter combinations."""
-        combinations = ['th', 'sh', 'ch', 'ph', 'qu', 'wr', 'gh', 'kn', 'ou', 'ae', 'ie', 'nt', io]
+        combinations = ['th', 'sh', 'ch', 'ph', 'qu', 'wr', 'gh', 'kn', 'ou', 'ae', 'ie', 'nt']
         lw = word.lower()
         return any(comb in lw for comb in combinations)
     
